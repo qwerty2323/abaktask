@@ -1,5 +1,19 @@
 AbakTask::Application.routes.draw do
-  resources :pages
+  #resources :pages
+ 
+#  match '/' => 'pages#index', :as => :pages
+  match 'add' => 'pages#new'
+#  match '/:path' => 'pages#show'
+  match '*path/add' => 'pages#new',:constraints => {:path => /[\/a-zA-z_]+/}, :as => :new_page
+  match '*path/edit' => 'pages#edit',:constraints => {:path => /[\/a-zA-z_]+/}, :as => :edit_page
+  match '*path/' => 'pages#create',:constraints => {:path => /[\/a-zA-z_]+/}, :via => :post
+  match '*path/' => 'pages#update',:constraints => {:path => /[\/a-zA-z_]+/}, :via => :put
+  match '*path/' => 'pages#show',:constraints => {:path => /[\/a-zA-z_]+/}, :as => :page
+
+  match '/' => 'pages#create', :via => :post
+  match '/' => 'pages#update', :via => :put  
+  match '/' => 'pages#index', :as => :pages
+#  match 'add' => 'pages#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -50,7 +64,8 @@ AbakTask::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  #
+  root :to => 'pages#index'
 
   # See how all your routes lay out with "rake routes"
 
