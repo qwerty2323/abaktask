@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller.controller_name%>">
-
+<table>
+<td id='tree'>
+<div>
+<h2> Tree </h2>
+<%= raw @tree if @tree %>
+</div>
+</td>
+<td>
+<div id='content'>
 <%= yield %>
-
+</div>
+<td>
+<table>
 </body>
 </html>
