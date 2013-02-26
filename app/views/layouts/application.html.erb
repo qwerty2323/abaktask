@@ -8,17 +8,19 @@
 </head>
 <body class="<%= controller.controller_name%>">
 <table>
-<td id='tree'>
-<div>
-<h2> Tree </h2>
-<%= raw @tree if @tree %>
-</div>
-</td>
-<td>
-<div id='content'>
-<%= yield %>
-</div>
-<td>
-<table>
+  <tr>
+    <td id='tree'>
+      <div>
+        <h2> Tree </h2>
+        <%= raw @tree if @tree %>
+      </div>
+    </td>
+    <td id='content'>
+      <div>
+       <%= yield %>
+      </div> 
+    <td>
+  <tr>
+</table>
 </body>
 </html>

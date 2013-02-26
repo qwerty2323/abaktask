@@ -15,14 +15,16 @@
 #content
 {
   padding: 1em 2em;
+  vertical-align: top;
 }
 
 #tree {
   background-color: lime;
   float: left;
   padding: 1em 2em;
-  width: 13em;
-  height: 300px;
+  min-width: 13em;
+  height: 450px;
+  border: 1px solid black;
 }
 
 #notice {
