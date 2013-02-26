@@ -1,0 +1,17 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+<h2><%= 'Path: ' + ( @page ? @page.path : 'Page Not Found' ) %></h2>
+
+<p>
+  <h3><%= @page ? @page.title : 'No Data Found' %></h3>
+</p>
+
+<p>
+  <b>Text:</b><br/>
+  <%= raw @page ? @page.formatted_text : 'No Data Found' %>
+</p>
+
+<%= button_to '<< Back','/'+@page.parent_path, method: :get %> 
+<%= button_to 'Edit', @page.name+'/edit', method: :get %>
+<%= button_to 'Add', @page.name+'/add', method: :get %>

@@ -1,0 +1,30 @@
+
+<!--
+<h1>Listing pages</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Full path</th>
+    <th>Title</th>
+    <th>Text</th>
+    <th>Formatted text</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+</table>
+-->
+
+<% if notice  %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<h1> Listing pages </h1>
+
+<%= raw @tree %>
+
+<br />
+
+<%= button_to 'New Page', '/add', method: :get %>
