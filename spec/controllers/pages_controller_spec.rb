@@ -24,7 +24,7 @@ describe PagesController do
   # Page. As you add validations to Page, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "name" => "MyString" }
+    { "name" => "MyString", "title" => "My Title", "text" => "My Text" }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -34,6 +34,7 @@ describe PagesController do
     {}
   end
 
+=begin
   describe "GET index" do
     it "assigns all pages as @pages" do
       page = Page.create! valid_attributes
@@ -41,11 +42,12 @@ describe PagesController do
       assigns(:pages).should eq([page])
     end
   end
+=end
 
   describe "GET show" do
     it "assigns the requested page as @page" do
       page = Page.create! valid_attributes
-      get :show, {:id => page.to_param}, valid_session
+      get :show, {:path => page.path.to_param}, valid_session
       assigns(:page).should eq(page)
     end
   end
@@ -60,7 +62,7 @@ describe PagesController do
   describe "GET edit" do
     it "assigns the requested page as @page" do
       page = Page.create! valid_attributes
-      get :edit, {:id => page.to_param}, valid_session
+      get :edit, {:path => page.path.to_param}, valid_session
       assigns(:page).should eq(page)
     end
   end
@@ -69,7 +71,7 @@ describe PagesController do
     describe "with valid params" do
       it "creates a new Page" do
         expect {
-          post :create, {:page => valid_attributes}, valid_session
+          post :create, {:page => valid_attributes }, valid_session
         }.to change(Page, :count).by(1)
       end
 
@@ -81,7 +83,7 @@ describe PagesController do
 
       it "redirects to the created page" do
         post :create, {:page => valid_attributes}, valid_session
-        response.should redirect_to(Page.last)
+        response.should redirect_to(Page.last.url)
       end
     end
 
@@ -110,20 +112,20 @@ describe PagesController do
         # specifies that the Page created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Page.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => page.to_param, :page => { "name" => "MyString" }}, valid_session
+        Page.any_instance.should_receive(:update_attributes).with({ "title" => "MyString Title" })
+        put :update, {:path => page.path.to_param, :page => { "title" => "MyString Title" }}, valid_session
       end
 
       it "assigns the requested page as @page" do
         page = Page.create! valid_attributes
-        put :update, {:id => page.to_param, :page => valid_attributes}, valid_session
+        put :update, {:path => page.path.to_param, :page => valid_attributes}, valid_session
         assigns(:page).should eq(page)
       end
 
       it "redirects to the page" do
         page = Page.create! valid_attributes
-        put :update, {:id => page.to_param, :page => valid_attributes}, valid_session
-        response.should redirect_to(page)
+        put :update, {:path => page.path.to_param, :page => valid_attributes}, valid_session
+        response.should redirect_to(page.url)
       end
     end
 
@@ -132,7 +134,7 @@ describe PagesController do
         page = Page.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Page.any_instance.stub(:save).and_return(false)
-        put :update, {:id => page.to_param, :page => { "name" => "invalid value" }}, valid_session
+        put :update, {:path => page.path.to_param, :page => { "title" => "invalid value"*10 }}, valid_session
         assigns(:page).should eq(page)
       end
 
@@ -140,12 +142,13 @@ describe PagesController do
         page = Page.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Page.any_instance.stub(:save).and_return(false)
-        put :update, {:id => page.to_param, :page => { "name" => "invalid value" }}, valid_session
+        put :update, {:path => page.path.to_param, :page => { "title" => "invalid value"*10 }}, valid_session
         response.should render_template("edit")
       end
     end
   end
 
+=begin
   describe "DELETE destroy" do
     it "destroys the requested page" do
       page = Page.create! valid_attributes
@@ -160,5 +163,6 @@ describe PagesController do
       response.should redirect_to(pages_url)
     end
   end
+=end
 
 end

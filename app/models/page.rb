@@ -14,6 +14,8 @@ class Page < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true, 
     :format => { with: /\A([_A-Za-z\u0430-\u044F\u0410-\u042F\d]{,99})[A-Za-z\u0430-\u044F\u0410-\u042F\d]\Z/i } 
-  validates :title, :text, presence: true
+
+  validates :title, length: { maximum: 50 }, presence: true
+  validates :text, length: { maximum: 350 }, presence: true
 
 end

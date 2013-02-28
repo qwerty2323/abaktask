@@ -4,24 +4,16 @@ AbakTask::Application.routes.draw do
   route_constraint = { path: regex_pattern }
   path = '*path/'
 
-  #match '/' => 'pages#index', :as => :pages
-  #match 'add' => 'pages#new
   match 'add' => 'pages#new'
   match '/' => 'pages#create', :via => :post
   match '/' => 'pages#update', :via => :put  
-  match '/' => 'pages#index', :as => :page
+  match '/' => 'pages#index', :as => :pages
  
   match path + 'add' => 'pages#new',:constraints => route_constraint, :as => :new_page
   match path + 'edit' => 'pages#edit',:constraints => route_constraint, :as => :edit_page
   match path => 'pages#create',:constraints => route_constraint, :via => :post
   match path => 'pages#update',:constraints => route_constraint, :via => :put
   match path => 'pages#show',:constraints => route_constraint, :as => :page
-
-#  match 'add' => 'pages#new'
-#  match '/' => 'pages#create', :via => :post
-#  match '/' => 'pages#update', :via => :put  
-#  match '/' => 'pages#index', :as => :pages
-#  match 'add' => 'pages#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

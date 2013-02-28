@@ -21,6 +21,8 @@ module PageMethodsModule
         anchor = match1[2..-3]
         first_word = ""
         rest_words = anchor.sub(/\A\S+\s/) { |match2| first_word = match2.strip; "";  }
+        puts first_word
+        puts Page.find_by_path(first_word)
         if Page.find_by_path(first_word)
           "<a href=\"/#{first_word}\">"+rest_words+"</a>"
         else
@@ -163,6 +165,7 @@ module PageMethodsModule
     def text=(some_str)
       new_text = some_str.dup
       write_attribute(:text, some_str)
+      puts text + ":" + path 
       write_attribute(:formatted_text, self.class.format_text(new_text))
     end
 
