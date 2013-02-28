@@ -20,12 +20,11 @@ module PageMethodsModule
       newstr.gsub!(/(\(\()[^\(\)]+\)\)/) do |match1|
         anchor = match1[2..-3]
         first_word = ""
-        rest_words = anchor.sub(/\A\S+\s/) { |match2| first_word = match2.strip; "";  }
-        puts first_word
-        puts Page.find_by_path(first_word)
+        rest_words = anchor.sub(/\A\S+\s/) { |match2| first_word = match2.strip; ""; }
         if Page.find_by_path(first_word)
           "<a href=\"/#{first_word}\">"+rest_words+"</a>"
         else
+          puts "fail"
           match1
         end
       end
@@ -116,9 +115,6 @@ module PageMethodsModule
     end
 
   end # Module PageClassMethods
-
-#  module PageInstMethods
-#    after_initialize :init
     
     # Init
 
@@ -152,7 +148,6 @@ module PageMethodsModule
     # Setters
 
     def path=(path_str)
-      puts "write #{self.id} attr full_path: #{path_str}"
       write_attribute(:path, path_str)
       save
     end
@@ -164,8 +159,7 @@ module PageMethodsModule
 
     def text=(some_str)
       new_text = some_str.dup
-      write_attribute(:text, some_str)
-      puts text + ":" + path 
+      write_attribute(:text, some_str) 
       write_attribute(:formatted_text, self.class.format_text(new_text))
     end
 
@@ -246,7 +240,5 @@ module PageMethodsModule
 
     end # Method unparent! end
 
-#  end # Module PageInstMethods end
 
 end # Module PageMethodsModule end
-#end # Module Pages end

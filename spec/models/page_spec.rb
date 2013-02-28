@@ -23,7 +23,7 @@ describe Page do
     it 'should format some hyperlink' do
       valid_page.save
       valid_page.text = "((Valid_Page Some Hyperlink Text))"
-      valid_page.formatted_text.should be_eql("<a href='/Valid_Page'>Some Hyperlink Text</a>")
+      valid_page.formatted_text.should be_eql("<a href=\"/Valid_Page\">Some Hyperlink Text</a>")
     end
   end
    
