@@ -72,7 +72,6 @@ module PageMethodsModule
       result = offset.zero? ? str : '~> ' + str.to_s
       offset_str = '&nbsp;&nbsp;'
       offset.times { result = offset_str + result }
-      puts result
       result
     end # Method output(...) end
 
